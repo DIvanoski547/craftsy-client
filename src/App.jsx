@@ -1,6 +1,7 @@
 import './App.css'
-import Homepage from './pages/Homepage'
 import { Routes, Route } from "react-router-dom"
+import Homepage from './pages/Homepage'
+import LoginPage from './pages/LoginPage'
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
     <>
       <Routes>
         <Route exact path="/" element={< Homepage />} />
+        <Route exact path="/login" element={< LoginPage />} />
       </Routes>
     </>
   )

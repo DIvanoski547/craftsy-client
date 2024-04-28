@@ -1,12 +1,12 @@
 import Navbar from "../components/Navbar";
 
-function Homepage() {
+function LoginPage() {
   return (
     <>
       <Navbar />
-      <h2> Homepage</h2>
+      <h1>Login Page</h1>
     </>
   );
 }
 
-export default Homepage;
+export default LoginPage;
