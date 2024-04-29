@@ -1,5 +1,5 @@
 {
-  "name": "craftsy-client",
+  "name": "kosta-crafts-client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "antd": "^5.16.5",
     "axios": "^1.6.8",
     "cloudinary": "^1.41.3",
     "multer": "^1.4.5-lts.1",
