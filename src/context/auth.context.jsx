@@ -9,11 +9,11 @@ function AuthProviderWrapper (props) {
     const [user, setUser] = useState(null);
 
     const storeToken = (token) => {
-        localStorage.setItem('AuthToken', token);
+        localStorage.setItem('authToken', token);
     }
 
     const authenticateUser = () => {
-        const storedToken = localStorage.getItem('AuthToken');
+        const storedToken = localStorage.getItem('authToken');
 
         if (storedToken) {
         authService.verify()
@@ -36,7 +36,7 @@ function AuthProviderWrapper (props) {
     }
 
     const removeToken = () => {
-        localStorage.removeItem('AuthToken');
+        localStorage.removeItem('authToken');
     }
 
     const logOutUser = () => {

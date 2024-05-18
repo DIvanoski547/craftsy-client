@@ -30,7 +30,7 @@ function LoginPage() {
     authService
       .login(requestBody)
       .then((response) => {
-        console.log('JWT token', response.data.authToken );
+        console.log("JWT token", response.data.authToken);
         storeToken(response.data.authToken);
       })
       .then(() => {
@@ -48,13 +48,11 @@ function LoginPage() {
       <Navbar />
       <h1>Login Page</h1>
 
-        <form onSubmit={handleLoginSubmit}>
-          {/* EMAIL INPUT */}
-          <label>Email:</label>
+      <form onSubmit={handleLoginSubmit}>
+        <label>Email:</label>
         <input type="email" name="email" value={email} onChange={handleEmail} />
 
-          {/* PASSWORD INPUT */}
-          <label>Password:</label>
+        <label>Password:</label>
         <input
           type="password"
           name="password"
@@ -62,9 +60,9 @@ function LoginPage() {
           onChange={handlePassword}
         />
 
-          <button type="submit">Login</button>
-        </form>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <button type="submit">Login</button>
+      </form>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </>
   );
 }
