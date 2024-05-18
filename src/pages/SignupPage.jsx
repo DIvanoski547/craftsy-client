@@ -2,13 +2,6 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
-import Navbar from "../components/Navbar";
-// import { Input, Tooltip, Button, Card } from "antd";
-// import {
-//   InfoCircleOutlined,
-//   EyeInvisibleOutlined,
-//   EyeTwoTone,
-// } from "@ant-design/icons";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -33,8 +26,6 @@ function SignupPage() {
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
-      })
-      .then(() => {
         navigate("/");
       })
       .catch((error) => {
@@ -46,14 +37,13 @@ function SignupPage() {
   };
 
   return (
-    <>
-      <Navbar />
+    <div>
       <h1>Signup Page</h1>
 
       <form onSubmit={handleSignupSubmit}>
         <label>Username:</label>
         <input
-          type="username"
+          type="text"
           name="username"
           value={username}
           onChange={handleUsername}
@@ -73,7 +63,7 @@ function SignupPage() {
         <button type="submit">Submit</button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-    </>
+    </div>
   );
 }
 export default SignupPage;

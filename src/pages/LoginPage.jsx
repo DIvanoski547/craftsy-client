@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
@@ -44,8 +43,7 @@ function LoginPage() {
   };
 
   return (
-    <>
-      <Navbar />
+    <div>
       <h1>Login Page</h1>
 
       <form onSubmit={handleLoginSubmit}>
@@ -63,7 +61,7 @@ function LoginPage() {
         <button type="submit">Login</button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-    </>
+    </div>
   );
 }
 
