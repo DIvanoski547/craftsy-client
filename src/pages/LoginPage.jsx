@@ -2,12 +2,6 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
-// import { Input, Tooltip, Button, Card } from "antd";
-// import {
-//   InfoCircleOutlined,
-//   EyeInvisibleOutlined,
-//   EyeTwoTone,
-// } from "@ant-design/icons";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -37,7 +31,7 @@ function LoginPage() {
         navigate("/");
       })
       .catch((error) => {
-        const errorDescription = error.response.data.message;
+        const errorDescription = error.response?.data?.message || 'An error occurred during login';
         setErrorMessage(errorDescription);
       });
   };

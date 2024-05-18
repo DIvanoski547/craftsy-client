@@ -11,6 +11,7 @@ function Navbar() {
         <img src="./logo.png" alt="logo-img" className="img" />
       </Link>
 
+
       {/* LOGGED IN USER */}
       {isLoggedIn && (
         <>
