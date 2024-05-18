@@ -2,7 +2,7 @@ function Homepage() {
 
   return (
     <>
-      <h2> Homepage</h2>
+      <h1> Homepage</h1>
     </>
   );
 }

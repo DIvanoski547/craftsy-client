@@ -11,17 +11,20 @@ function Navbar() {
         <img src="./logo.png" alt="logo-img" className="img" />
       </Link>
 
+      <Link to="/">
+        <button>Home</button>
+      </Link>
 
-      {/* LOGGED IN USER */}
-      {isLoggedIn && (
+      <Link to="/profile">
+        <button>Profile</button>
+      </Link>
+
+      {isLoggedIn ? (
         <>
           <span>Welcome {user.username}</span>
           <button onClick={logOutUser}>Logout</button>
         </>
-      )}
-
-      {/* LOGGED OUT USER */}
-      {!isLoggedIn && (
+      ) : (
         <>
           <Link to="/signup">
             <button>Signup</button>

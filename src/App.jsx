@@ -5,6 +5,7 @@ import Homepage from './pages/Homepage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import IsAnon from './components/IsAnon'
+import ProfilePage from './pages/ProfilePage'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/login" element={<IsAnon><LoginPage /></IsAnon>} />
         <Route exact path='/signup' element={<IsAnon><SignupPage /></IsAnon>} />
+        <Route exact path='/profile' element={<ProfilePage />} />
       </Routes>
     </div>
   )
