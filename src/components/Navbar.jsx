@@ -15,6 +15,10 @@ function Navbar() {
         <button>Home</button>
       </Link>
 
+      <Link to="/products">
+        <button>Products</button>
+      </Link> 
+
       {isLoggedIn ? (
         <>
           <Link to="/profile">

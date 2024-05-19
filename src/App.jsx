@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import IsAnon from "./components/IsAnon";
 import ProfilePage from "./pages/ProfilePage";
+import ProductsPage from "./pages/ProductsPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/profile" element={<ProfilePage />} />
+        <Route exact path="/products" element={<ProductsPage />} />
         <Route
           exact
           path="/login"
