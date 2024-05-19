@@ -3,7 +3,7 @@ import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 
 function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, logOutUser } = useContext(AuthContext);
 
   return (
     <nav>
@@ -15,13 +15,11 @@ function Navbar() {
         <button>Home</button>
       </Link>
 
-      <Link to="/profile">
-        <button>Profile</button>
-      </Link>
-
       {isLoggedIn ? (
         <>
-          <span>Welcome {user.username}</span>
+          <Link to="/profile">
+            <button>Profile</button>
+          </Link>
           <button onClick={logOutUser}>Logout</button>
         </>
       ) : (
