@@ -7,6 +7,7 @@ import SignupPage from "./pages/SignupPage";
 import IsAnon from "./components/IsAnon";
 import ProfilePage from "./pages/ProfilePage";
 import ProductListPage from "./pages/ProductListPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/profile" element={<ProfilePage />} />
         <Route exact path="/products" element={<ProductListPage />} />
+        <Route exact path="/product/:productId" element={<ProductDetailsPage />} />
         <Route
           exact
           path="/login"
