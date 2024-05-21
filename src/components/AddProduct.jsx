@@ -29,7 +29,6 @@ function AddProduct(props) {
   return (
     <div>
       <h3>Add Product</h3>
-
       <form onSubmit={handleSubmit}>
         <label>Title:</label>
         <input
@@ -38,7 +37,6 @@ function AddProduct(props) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-
         <label>Description:</label>
         <textarea
           type="text"
@@ -46,7 +44,6 @@ function AddProduct(props) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-
         <label>Price:</label>
         <input
           type="number"
@@ -54,7 +51,6 @@ function AddProduct(props) {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
-
         <button type="submit">Submit</button>
       </form>
     </div>

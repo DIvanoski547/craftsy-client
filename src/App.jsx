@@ -8,6 +8,7 @@ import IsAnon from "./components/IsAnon";
 import ProfilePage from "./pages/ProfilePage";
 import ProductListPage from "./pages/ProductListPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ProductEditPage from "./pages/ProductEditPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/profile" element={<ProfilePage />} />
         <Route exact path="/products" element={<ProductListPage />} />
         <Route exact path="/product/:productId" element={<ProductDetailsPage />} />
+        <Route exact path="/projects/edit/:productId" element={<ProductEditPage />}/>
         <Route
           exact
           path="/login"
