@@ -4,23 +4,40 @@ import productsService from "../services/Product.service";
 import { AuthContext } from "../context/auth.context";
 
 function ProductDetailsPage() {
-  const {isLoggedIn} = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { productId } = useParams();
 
-  const getProduct = () => {
-    productsService
-      .getProduct(productId)
-      .then((response) => {
-        const oneProduct = response.data;
-        setProduct(oneProduct);
-      })
-      .catch((error) => console.log(error));
-  };
-
   useEffect(() => {
+    const getProduct = () => {
+      setLoading(true);
+      productsService
+        .getProduct(productId)
+        .then((response) => {
+          setProduct(response.data);
+          setError(null);
+        })
+        .catch((error) => {
+          setError('Error fetching product details');
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        })
+    };
+
     getProduct();
   }, [productId]);
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <div>{error}</div>
+  }
 
   return (
     <div>
@@ -34,12 +51,11 @@ function ProductDetailsPage() {
 
       {isLoggedIn && (
         <>
-        <Link to={`/products/edit/${productId}`}>
-        <button>Edit Product</button>
-      </Link>
+          <Link to={`/products/edit/${productId}`}>
+            <button>Edit Product</button>
+          </Link>
         </>
       )}
-      
     </div>
   );
 }
