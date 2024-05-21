@@ -5,6 +5,7 @@ import Homepage from "./pages/Homepage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import IsAnon from "./components/IsAnon";
+import IsPrivate from "./components/IsPrivate";
 import ProfilePage from "./pages/ProfilePage";
 import ProductListPage from "./pages/ProductListPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
@@ -18,8 +19,20 @@ function App() {
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/profile" element={<ProfilePage />} />
         <Route exact path="/products" element={<ProductListPage />} />
-        <Route exact path="/product/:productId" element={<ProductDetailsPage />} />
-        <Route exact path="/projects/edit/:productId" element={<ProductEditPage />}/>
+        <Route
+          exact
+          path="/product/:productId"
+          element={<ProductDetailsPage />}
+        />
+        <Route
+          exact
+          path="/products/edit/:productId"
+          element={
+            <IsPrivate>
+              <ProductEditPage />
+            </IsPrivate>
+          }
+        />
         <Route
           exact
           path="/login"

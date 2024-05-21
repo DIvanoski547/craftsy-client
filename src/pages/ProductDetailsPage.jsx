@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import productsService from "../services/Product.service";
+import { AuthContext } from "../context/auth.context";
 
 function ProductDetailsPage() {
+  const {isLoggedIn} = useContext(AuthContext);
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
 
@@ -29,9 +31,15 @@ function ProductDetailsPage() {
           <p>{product.price} €</p>
         </>
       )}
-      <Link to={`/projects/edit/${productId}`}>
+
+      {isLoggedIn && (
+        <>
+        <Link to={`/products/edit/${productId}`}>
         <button>Edit Product</button>
       </Link>
+        </>
+      )}
+      
     </div>
   );
 }

@@ -67,7 +67,7 @@ function ProductEditPage() {
           name="price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-        />
+        />  
         <button type="submit">Submit changes</button>
       </form>
       <button onClick={deleteProduct}>Delete product</button>
