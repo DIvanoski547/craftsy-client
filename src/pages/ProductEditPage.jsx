@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import productsService from "../services/Product.service";
 
 function ProductEditPage() {
@@ -27,7 +27,7 @@ function ProductEditPage() {
     const requestBody = { title, description, price };
 
     productsService.updateProduct(productId, requestBody).then(() => {
-      navigate(`/product/${productId}`);
+      navigate(`/products/${productId}`);
     });
   };
 
@@ -38,6 +38,10 @@ function ProductEditPage() {
         navigate("/products");
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   return (
@@ -67,10 +71,12 @@ function ProductEditPage() {
           name="price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-        />  
+        />
         <button type="submit">Submit changes</button>
       </form>
       <button onClick={deleteProduct}>Delete product</button>
+      <br />
+      <button onClick={handleBack}>Back</button>
     </div>
   );
 }

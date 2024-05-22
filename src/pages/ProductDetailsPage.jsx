@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import productsService from "../services/Product.service";
 import { AuthContext } from "../context/auth.context";
 
@@ -8,7 +8,9 @@ function ProductDetailsPage() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const { productId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProduct = () => {
@@ -39,6 +41,10 @@ function ProductDetailsPage() {
     return <div>{error}</div>
   }
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div>
       {product && (
@@ -56,6 +62,8 @@ function ProductDetailsPage() {
           </Link>
         </>
       )}
+<br />
+      <button onClick={handleBack}>Back</button>
     </div>
   );
 }

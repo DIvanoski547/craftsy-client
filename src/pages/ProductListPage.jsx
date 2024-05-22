@@ -3,12 +3,14 @@ import productsService from "../services/Product.service";
 import AddProduct from "../components/AddProduct";
 import ProductCard from "../components/ProductCard";
 import { AuthContext } from "../context/auth.context";
+import { Link, useNavigate } from "react-router-dom";
 
 function ProductListPage() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const getAllProducts = () => {
     productsService
@@ -27,6 +29,10 @@ function ProductListPage() {
   useEffect(() => {
     getAllProducts();
   }, []);
+
+  const handleBack = () => {
+    navigate(-1);
+  }
 
   return (
     <div>
@@ -47,6 +53,7 @@ function ProductListPage() {
           products.map((product) => (
             <ProductCard key={product._id} {...product} />
           ))}
+          <button onClick={handleBack}>Back</button>
     </div>
   );
 }

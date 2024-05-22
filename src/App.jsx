@@ -21,7 +21,7 @@ function App() {
         <Route exact path="/products" element={<ProductListPage />} />
         <Route
           exact
-          path="/product/:productId"
+          path="/products/:productId"
           element={<ProductDetailsPage />}
         />
         <Route

@@ -7,6 +7,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
@@ -15,10 +16,20 @@ function LoginPage() {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
+  const validateForm = () => {
+    if (!email || !password) {
+      setErrorMessage("Both email and password are required");
+      return false;
+    }
+    return true;
+  };
+
   const handleLoginSubmit = (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
     const requestBody = { email, password };
+    setIsLoading(true);
 
     authService
       .login(requestBody)
@@ -31,29 +42,49 @@ function LoginPage() {
         navigate("/");
       })
       .catch((error) => {
-        const errorDescription = error.response?.data?.message || 'An error occurred during login';
+        const errorDescription =
+          error.response?.data?.message || "An error occurred during login";
         setErrorMessage(errorDescription);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
+
+  const handleBack = () => {
+    navigate(-1);
+  }
 
   return (
     <div>
       <h1>Login Page</h1>
 
       <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value={email}
+          onChange={handleEmail}
+          required
+        />
 
-        <label>Password:</label>
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
           name="password"
+          id="password"
           value={password}
           onChange={handlePassword}
+          required
         />
 
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Login"}
+        </button>
       </form>
+      <button onClick={handleBack}>Back</button>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
