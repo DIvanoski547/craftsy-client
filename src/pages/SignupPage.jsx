@@ -41,7 +41,7 @@ function SignupPage() {
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/");
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
