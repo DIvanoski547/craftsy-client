@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ProductListPage from "./pages/ProductListPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductEditPage from "./pages/ProductEditPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </div>
   );
 }
