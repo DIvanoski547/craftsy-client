@@ -10,30 +10,59 @@ class ProductsService {
       const storedToken = localStorage.getItem("authToken");
 
       if (storedToken) {
-        config.headers = { Authorization: `Bearer ${storedToken}` };
+        config.headers.Authorization = `Bearer ${storedToken}`;
       }
       return config;
     });
   }
 
-  createProduct = (requestBody) => {
-    return this.api.post("/api/products", requestBody);
+  createProduct = async (requestBody) => {
+    try {
+      return await this.api.post("/api/products", requestBody, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+    } catch (error) {
+      console.error("Error creating product", error);
+      throw error;
+    }
   };
 
-  getAllProducts = () => {
-    return this.api.get("/api/products");
+  getAllProducts = async () => {
+    try {
+      return await this.api.get("/api/products");
+    } catch (error) {
+      console.error("Error fetching all products", error);
+      throw error;
+    }
   };
 
-  getProduct = (id) => {
-    return this.api.get(`/api/products/${id}`);
+  getProduct = async (id) => {
+    try {
+      return await this.api.get(`/api/products/${id}`);
+    } catch (error) {
+      console.error(`Error fetching product with id ${id}`, error);
+      throw error;
+    }
   };
 
-  updateProduct = (id, requestBody) => {
-    return this.api.put(`/api/products/${id}`, requestBody);
+  updateProduct = async (id, requestBody) => {
+    try {
+      return await this.api.put(`/api/products/${id}`, requestBody, {
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      console.error(`Error updating product with id ${id}`, error);
+      throw error;
+    }
   };
 
-  deleteProduct = (id) => {
-    return this.api.delete(`/api/products/${id}`);
+  deleteProduct = async (id) => {
+    try {
+      return await this.api.delete(`/api/products/${id}`);
+    } catch (error) {
+      console.error(`Error deleting product with id ${id}`, error);
+      throw error;
+    }
   };
 }
 

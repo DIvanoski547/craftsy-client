@@ -1,15 +1,28 @@
 import { Link } from "react-router-dom";
+import { Card } from "antd";
 
-function ProductCard({title, description, price, _id}) {
-
+function ProductCard({ title, description, price, category, imageUrl, _id }) {
   return (
-    <div>
-      <Link to={`/products/${_id}`}>
-        <h3>{title}</h3>
-        <h3>Description: {description}</h3>
-        <h3>Price: {price} €</h3>
-      </Link>
-    </div>
+    <Link to={`/products/${_id}`}>
+      <Card
+        size="small"
+        title={title}
+        cover=
+        {
+          <img
+            alt="example"
+            src={imageUrl}
+          />
+        }
+        style={{
+          width: 200,
+        }}
+      >
+        <p>description: {description}.</p>
+        <p>price: {price} €</p>
+        <p>category: {category}</p>
+      </Card>
+    </Link>
   );
 }
 

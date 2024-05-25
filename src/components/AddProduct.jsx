@@ -5,15 +5,23 @@ function AddProduct(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestBody = {
-      title,
-      description,
-      price,
-    };
+    if (!title || !description || !price || !category || !image) {
+      alert("All fields are required!");
+      return;
+    }
+
+    const requestBody = new FormData();
+    requestBody.append("title", title);
+    requestBody.append("description", description);
+    requestBody.append("price", price);
+    requestBody.append("category", category);
+    requestBody.append("imageUrl", image);
 
     productService
       .createProduct(requestBody)
@@ -21,6 +29,8 @@ function AddProduct(props) {
         setTitle("");
         setDescription("");
         setPrice("");
+        setCategory("");
+        setImage(null);
         props.refreshProducts();
       })
       .catch((err) => console.log(err));
@@ -39,7 +49,6 @@ function AddProduct(props) {
         />
         <label>Description:</label>
         <textarea
-          type="text"
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -51,9 +60,25 @@ function AddProduct(props) {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
+        <label>Category:</label>
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="">Select a category</option>
+          <option value="household">Household</option>
+          <option value="kitchen">Kitchen</option>
+          <option value="car">Car</option>
+          <option value="personal">Personal</option>
+          <option value="engraved">Engraved</option>
+        </select>
+        <label>Image:</label>
+        <input
+          type="file"
+          name="imageUrl"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
         <button type="submit">Submit</button>
       </form>
     </div>
   );
 }
+
 export default AddProduct;
