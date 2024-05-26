@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
+import { Button } from "antd";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -41,7 +42,7 @@ function SignupPage() {
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
@@ -52,10 +53,6 @@ function SignupPage() {
       .finally(() => {
         setIsLoading(false);
       });
-  };
-
-  const handleBack = () => {
-    navigate(-1);
   };
 
   return (
@@ -93,11 +90,10 @@ function SignupPage() {
           required
         />
 
-        <button type="submit" disabled={isLoading}>
+        <Button type="submit" disabled={isLoading}>
           {isLoading ? "Submitting..." : "Submit"}
-        </button>
+        </Button>
       </form>
-      <button onClick={handleBack}>Back</button>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );

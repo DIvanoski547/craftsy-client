@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import { Button } from "antd";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -51,9 +52,7 @@ function LoginPage() {
       });
   };
 
-  const handleBack = () => {
-    navigate(-1);
-  }
+ 
 
   return (
     <div>
@@ -80,11 +79,10 @@ function LoginPage() {
           required
         />
 
-        <button type="submit" disabled={isLoading}>
+        <Button type="submit" disabled={isLoading}>
           {isLoading ? "Logging in..." : "Login"}
-        </button>
+        </Button>
       </form>
-      <button onClick={handleBack}>Back</button>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );

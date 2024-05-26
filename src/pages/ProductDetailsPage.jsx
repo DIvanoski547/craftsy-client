@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import productsService from "../services/Product.service";
 import { AuthContext } from "../context/auth.context";
+import {Button} from 'antd';
 
 function ProductDetailsPage() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -65,12 +66,12 @@ function ProductDetailsPage() {
       {isLoggedIn && (
         <>
           <Link to={`/products/edit/${productId}`}>
-            <button>Edit Product</button>
+            <Button>Edit Product</Button>
           </Link>
         </>
       )}
       <br />
-      <button onClick={handleBack}>Back</button>
+      <Button onClick={handleBack}>Back</Button>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
+import { Button } from "antd";
 
 function Navbar() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -12,31 +13,31 @@ function Navbar() {
       </Link>
 
       <Link to="/">
-        <button>Home</button>
+        <Button>Home</Button>
       </Link>
 
       <Link to="/products">
-        <button>Products</button>
+        <Button>Products</Button>
       </Link>
 
       <Link to="/about">
-        <button>About</button>
+        <Button>About</Button>
       </Link>
 
       {isLoggedIn ? (
         <>
           <Link to="/profile">
-            <button>Profile</button>
+            <Button>Profile</Button>
           </Link>
-          <button onClick={logOutUser}>Logout</button>
+          <Button onClick={logOutUser}>Logout</Button>
         </>
       ) : (
         <>
           <Link to="/signup">
-            <button>Signup</button>
+            <Button>Signup</Button>
           </Link>
           <Link to="/login">
-            <button>Login</button>
+            <Button>Login</Button>
           </Link>
         </>
       )}

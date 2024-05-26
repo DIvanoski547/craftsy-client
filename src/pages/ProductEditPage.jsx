@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import productsService from "../services/Product.service";
+import { Button } from "antd";
 
 function ProductEditPage() {
   const [title, setTitle] = useState("");
@@ -98,7 +99,7 @@ function ProductEditPage() {
       </form>
       <button onClick={deleteProduct}>Delete product</button>
       <br />
-      <button onClick={handleBack}>Back</button>
+      <Button onClick={handleBack}>Back</Button>
     </div>
   );
 }

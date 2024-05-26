@@ -1,5 +1,6 @@
 import { useState } from "react";
 import productService from "../services/Product.service";
+import { Button } from "antd";
 
 function AddProduct(props) {
   const [title, setTitle] = useState("");
@@ -75,7 +76,7 @@ function AddProduct(props) {
           name="imageUrl"
           onChange={(e) => setImage(e.target.files[0])}
         />
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   );

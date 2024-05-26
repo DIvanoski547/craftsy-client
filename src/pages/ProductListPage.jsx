@@ -4,6 +4,7 @@ import AddProduct from "../components/AddProduct";
 import ProductCard from "../components/ProductCard";
 import { AuthContext } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from 'antd';
 
 function ProductListPage() {
   const [products, setProducts] = useState([]);
@@ -53,7 +54,7 @@ function ProductListPage() {
           products.map((product) => (
             <ProductCard key={product._id} {...product} />
           ))}
-          <button onClick={handleBack}>Back</button>
+          <Button onClick={handleBack}>Back</Button>
     </div>
   );
 }
