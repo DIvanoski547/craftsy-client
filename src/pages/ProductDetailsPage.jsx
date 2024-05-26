@@ -20,25 +20,26 @@ function ProductDetailsPage() {
         .then((response) => {
           setProduct(response.data);
           setError(null);
+          console.log(response.data);
         })
         .catch((error) => {
-          setError('Error fetching product details');
+          setError("Error fetching product details");
           console.log(error);
         })
         .finally(() => {
           setLoading(false);
-        })
+        });
     };
 
     getProduct();
   }, [productId]);
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>
+    return <div>{error}</div>;
   }
 
   const handleBack = () => {
@@ -49,9 +50,15 @@ function ProductDetailsPage() {
     <div>
       {product && (
         <>
+          <img
+            src={product.imageUrl}
+            alt={`${product.title} image`}
+            style={{ width: 200 }}
+          />
           <h1>{product.title}</h1>
-          <p>{product.description}</p>
-          <p>{product.price} €</p>
+          <p>Description: {product.description}</p>
+          <p>Price: {product.price} €</p>
+          <p>Category: {product.category}</p>
         </>
       )}
 
@@ -62,7 +69,7 @@ function ProductDetailsPage() {
           </Link>
         </>
       )}
-<br />
+      <br />
       <button onClick={handleBack}>Back</button>
     </div>
   );

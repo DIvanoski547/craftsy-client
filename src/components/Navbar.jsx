@@ -17,7 +17,11 @@ function Navbar() {
 
       <Link to="/products">
         <button>Products</button>
-      </Link> 
+      </Link>
+
+      <Link to="/about">
+        <button>About</button>
+      </Link>
 
       {isLoggedIn ? (
         <>

@@ -11,6 +11,7 @@ import ProductListPage from "./pages/ProductListPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductEditPage from "./pages/ProductEditPage";
 import Footer from "./components/Footer";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/profile" element={<ProfilePage />} />
         <Route exact path="/products" element={<ProductListPage />} />
+        <Route exact path="/about" element={<AboutPage />} />
         <Route
           exact
           path="/products/:productId"
@@ -52,6 +54,7 @@ function App() {
             </IsAnon>
           }
         />
+        
       </Routes>
       <Footer />
     </div>
