@@ -2,23 +2,17 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
-import { Button } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 
 function SignupPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
-  const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
-  const handleUsername = (e) => setUsername(e.target.value);
-
-  const validateForm = () => {
+  const validateForm = (values) => {
+    const { email, password, username } = values;
     if (!email || !password || !username) {
       setErrorMessage("All fields are required.");
       return false;
@@ -30,10 +24,10 @@ function SignupPage() {
     return true;
   };
 
-  const handleSignupSubmit = (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
+  const handleSignupSubmit = (values) => {
+    if (!validateForm(values)) return;
 
+    const { email, password, username } = values;
     const requestBody = { email, password, username };
     setIsLoading(true);
 
@@ -58,44 +52,87 @@ function SignupPage() {
   return (
     <div>
       <h1>Signup Page</h1>
-
-      <form onSubmit={handleSignupSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
+      <Form
+        name="basic"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        style={{
+          maxWidth: 600,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={handleSignupSubmit}
+        autoComplete="off"
+      >
+        <Form.Item
+          label="Username"
           name="username"
-          id="username"
-          value={username}
-          onChange={handleUsername}
-          required
-        />
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
+        <Form.Item
+          label="Email"
           name="email"
-          id="email"
-          value={email}
-          onChange={handleEmail}
-          required
-        />
+          rules={[
+            {
+              required: true,
+              message: "Please input your email!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
+        <Form.Item
+          label="Password"
           name="password"
-          id="password"
-          value={password}
-          onChange={handlePassword}
-          required
-        />
+          rules={[
+            {
+              required: true,
+              message: "Please input your password!",
+            },
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
 
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Submitting..." : "Submit"}
-        </Button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <Form.Item
+          name="remember"
+          valuePropName="checked"
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Button type="primary" htmlType="submit" disabled={isLoading}>
+            {isLoading ? "Submitting..." : "Submit"}
+          </Button>
+        </Form.Item>
+      </Form>
+      {errorMessage && <p className="error-message" style={{ color: "red" }}>{errorMessage}</p>}
     </div>
   );
 }
+
 export default SignupPage;
