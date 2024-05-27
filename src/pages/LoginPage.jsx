@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, Card } from "antd";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -50,85 +50,87 @@ function LoginPage() {
   };
 
   return (
-    <>
-      <h1>Login Page</h1>
-      <Form
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        style={{
-          maxWidth: 600,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={handleLoginSubmit}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your email!",
-            },
-          ]}
-        >
-          <Input value={email} onChange={handleEmail} />
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
-          <Input.Password value={password} onChange={handlePassword} />
-        </Form.Item>
-
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
+    <div>
+      <Card>
+        <h1>Login Page</h1>
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
           wrapperCol={{
-            offset: 8,
             span: 16,
           }}
+          style={{
+            maxWidth: 600,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={handleLoginSubmit}
+          autoComplete="off"
         >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Please input your email!",
+              },
+            ]}
+          >
+            <Input value={email} onChange={handleEmail} />
+          </Form.Item>
 
-        {errorMessage && (
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+          >
+            <Input.Password value={password} onChange={handlePassword} />
+          </Form.Item>
+
+          <Form.Item
+            name="remember"
+            valuePropName="checked"
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+
+          {errorMessage && (
+            <Form.Item
+              wrapperCol={{
+                offset: 8,
+                span: 16,
+              }}
+            >
+              <div style={{ color: "red" }}>{errorMessage}</div>
+            </Form.Item>
+          )}
+
           <Form.Item
             wrapperCol={{
               offset: 8,
               span: 16,
             }}
           >
-            <div style={{ color: "red" }}>{errorMessage}</div>
+            <Button type="primary" htmlType="submit" disabled={isLoading}>
+              {isLoading ? "Logging in..." : "Login"}
+            </Button>
           </Form.Item>
-        )}
-
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit" disabled={isLoading}>
-            {isLoading ? "Logging in..." : "Login"}
-          </Button>
-        </Form.Item>
-      </Form>
-    </>
+        </Form>
+      </Card>
+    </div>
   );
 }
 

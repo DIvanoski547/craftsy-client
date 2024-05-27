@@ -1,83 +1,150 @@
-import { useState } from "react";
 import productService from "../services/Product.service";
-import { Button } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import {
+  Button,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Upload,
+  message,
+  Card,
+} from "antd";
+
+const { Option } = Select;
 
 function AddProduct(props) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState(null);
+  const [form] = Form.useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (values) => {
+    const imageFile = values.imageUrl && values.imageUrl[0] ? values.imageUrl[0].originFileObj : null;
 
-    if (!title || !description || !price || !category || !image) {
-      alert("All fields are required!");
+    if (!imageFile) {
+      message.error("Image is required!");
       return;
     }
 
     const requestBody = new FormData();
-    requestBody.append("title", title);
-    requestBody.append("description", description);
-    requestBody.append("price", price);
-    requestBody.append("category", category);
-    requestBody.append("imageUrl", image);
+    requestBody.append("title", values.title);
+    requestBody.append("description", values.description);
+    requestBody.append("price", values.price);
+    requestBody.append("category", values.category);
+    requestBody.append("imageUrl", imageFile);
 
     productService
       .createProduct(requestBody)
       .then(() => {
-        setTitle("");
-        setDescription("");
-        setPrice("");
-        setCategory("");
-        setImage(null);
+        form.resetFields();
         props.refreshProducts();
+        message.success("Product added successfully!");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        message.error("Failed to add product. Please try again.");
+      });
+  };
+
+  const normFile = (e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
   };
 
   return (
     <div>
-      <h3>Add Product</h3>
-      <form onSubmit={handleSubmit}>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <label>Description:</label>
-        <textarea
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <label>Price:</label>
-        <input
-          type="number"
-          name="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <label>Category:</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Select a category</option>
-          <option value="household">Household</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="car">Car</option>
-          <option value="personal">Personal</option>
-          <option value="engraved">Engraved</option>
-        </select>
-        <label>Image:</label>
-        <input
-          type="file"
-          name="imageUrl"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
+      <Card>
+        <h3>Add Product</h3>
+        <Form
+          form={form}
+          labelCol={{
+            span: 4,
+          }}
+          wrapperCol={{
+            span: 14,
+          }}
+          layout="horizontal"
+          onFinish={handleSubmit}
+          style={{
+            maxWidth: 600,
+          }}
+        >
+          <Form.Item
+            label="Title"
+            name="title"
+            rules={[{ required: true, message: "Please input the title!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Description"
+            name="description"
+            rules={[
+              { required: true, message: "Please input the description!" },
+            ]}
+          >
+            <Input.TextArea />
+          </Form.Item>
+
+          <Form.Item
+            label="Price"
+            name="price"
+            rules={[{ required: true, message: "Please input the price!" }]}
+          >
+            <InputNumber
+              style={{ width: "100%" }}
+              min={0}
+              formatter={(value) => `$ ${value}`}
+              parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="Category"
+            name="category"
+            rules={[{ required: true, message: "Please select a category!" }]}
+          >
+            <Select placeholder="Select a category">
+              <Option value="household">Household</Option>
+              <Option value="kitchen">Kitchen</Option>
+              <Option value="car">Car</Option>
+              <Option value="personal">Personal</Option>
+              <Option value="engraved">Engraved</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            label="Upload"
+            name="imageUrl"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
+            rules={[{ required: true, message: "Please upload an image!" }]}
+          >
+            <Upload
+              name="imageUrl"
+              listType="picture-card"
+              beforeUpload={() => false}
+            >
+              <div>
+                <PlusOutlined />
+                <div style={{ marginTop: 8 }}>Upload</div>
+              </div>
+            </Upload>
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              offset: 4,
+              span: 14,
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   );
 }
