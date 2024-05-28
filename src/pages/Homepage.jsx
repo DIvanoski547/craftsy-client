@@ -1,20 +1,11 @@
-import React from 'react';
-
-const carouselStyle = {
-  height: '200px',
-  color: '#fff',
-  lineHeight: '200px',
-  textAlign: 'center',
-  background: '#364d79',
-  
-};
+import React from "react";
 
 function Homepage() {
 
   return (
-   <>
-   <h1>Homepage</h1>
-   </>
+    <>
+      <h1>Homepage</h1>
+    </>
   );
 }
 
