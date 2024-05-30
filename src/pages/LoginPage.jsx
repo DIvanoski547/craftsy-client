@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
+import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input, Card } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -50,28 +51,18 @@ function LoginPage() {
   };
 
   return (
-    <div>
-      <Card>
+    <div className="login-page">
+      <Card className="login-card">
         <h1>Login Page</h1>
         <Form
-          name="basic"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          style={{
-            maxWidth: 600,
-          }}
+          name="normal_login"
+          className="login-form"
           initialValues={{
             remember: true,
           }}
           onFinish={handleLoginSubmit}
-          autoComplete="off"
         >
           <Form.Item
-            label="Email"
             name="email"
             rules={[
               {
@@ -80,11 +71,15 @@ function LoginPage() {
               },
             ]}
           >
-            <Input value={email} onChange={handleEmail} />
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              value={email}
+              placeholder="Email"
+              onChange={handleEmail}
+            />
           </Form.Item>
 
           <Form.Item
-            label="Password"
             name="password"
             rules={[
               {
@@ -93,17 +88,16 @@ function LoginPage() {
               },
             ]}
           >
-            <Input.Password value={password} onChange={handlePassword} />
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type={password}
+              value={password}
+              onChange={handlePassword}
+              placeholder="Password"
+            />
           </Form.Item>
 
-          <Form.Item
-            name="remember"
-            valuePropName="unchecked"
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
+          <Form.Item name="remember" valuePropName="unchecked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
@@ -118,15 +112,16 @@ function LoginPage() {
             </Form.Item>
           )}
 
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button type="primary" htmlType="submit" disabled={isLoading}>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+              disabled={isLoading}
+            >
               {isLoading ? "Logging in..." : "Login"}
             </Button>
+            Or <a href="">register now!</a>
           </Form.Item>
         </Form>
       </Card>
