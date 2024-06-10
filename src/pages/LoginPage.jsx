@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import authService from "../services/auth.service";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
-import { Button, Checkbox, Form, Input, Card } from "antd";
+import { Button, Form, Input, Card } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 function LoginPage() {
@@ -97,10 +97,6 @@ function LoginPage() {
             />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="unchecked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
           {errorMessage && (
             <Form.Item
               wrapperCol={{
@@ -121,7 +117,7 @@ function LoginPage() {
             >
               {isLoading ? "Logging in..." : "Login"}
             </Button>
-            Or <a href="">register now!</a>
+           
           </Form.Item>
         </Form>
       </Card>

@@ -111,7 +111,7 @@ function SignupPage() {
 
           <Form.Item
             name="remember"
-            valuePropName="unchecked"
+            valuePropName="checked"
             wrapperCol={{
               offset: 8,
               span: 16,

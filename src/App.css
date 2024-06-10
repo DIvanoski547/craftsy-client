@@ -3,14 +3,24 @@
     width: 100px;
   }
 
-.center {
-  align-content: center;
-} 
-
 .login-card {
   width: 350px;
 }
 
+.headerStyle {
+  text-align: center;
+  color: '#fff';
+  height: 64;
+  padding-inline: 48;
+  line-height: '64px';
+  background-color: '#4096ff';
+}
+
+.footerStyle {
+  text-align: center;
+  color: '#fff';
+ background-color: '#4096ff';
+};
 
 
 

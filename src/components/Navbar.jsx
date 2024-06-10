@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
-import { Button, Layout, Menu } from "antd";
-
-const { Header } = Layout;
+import { Button, Menu } from "antd";
 
 function Navbar() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -46,17 +44,7 @@ function Navbar() {
   }));
 
   return (
-    <div>
-      <Header
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 1,
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <div />
+    <div >
         <Menu
           theme="dark"
           mode="horizontal"
@@ -66,8 +54,11 @@ function Navbar() {
             minWidth: 0,
           }}
         />
-        {isLoggedIn && <Button type="primary" onClick={logOutUser}>Logout</Button>}
-      </Header>
+        {isLoggedIn && (
+          <Button type="primary" onClick={logOutUser}>
+            Logout
+          </Button>
+        )}
     </div>
   );
 }
