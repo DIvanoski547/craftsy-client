@@ -1,37 +1,40 @@
+LAYOUT TEST
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.layoutFooter {
+padding: 0;
+}
+
+.ant-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-layout-content {
+  flex: 1;
+}
+
+/* FOOTER TEST  */
+.custom-footer {
+  text-align: center;
+  background-color: #001529;
+  color: white;
+  padding: 20px 0;
+}
+
 .img {
-    height: 100px;
-    width: 100px;
-  }
+  height: 100px;
+  width: 100px;
+}
 
 .login-card {
   width: 350px;
 }
-
-.headerStyle {
-  text-align: center;
-  color: '#fff';
-  height: 64;
-  padding-inline: 48;
-  line-height: '64px';
-  background-color: '#4096ff';
-}
-
-.footerStyle {
-  text-align: center;
-  color: '#fff';
- background-color: '#4096ff';
-};
-
-
-
-
-
-
-
-
-
-
-
 
 #components-form-demo-normal-login .login-form {
   max-width: 300px;

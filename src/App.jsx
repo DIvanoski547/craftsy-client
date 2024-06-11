@@ -10,29 +10,20 @@ import ProfilePage from "./pages/ProfilePage";
 import ProductListPage from "./pages/ProductListPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductEditPage from "./pages/ProductEditPage";
-// import Footer from "./components/Footer";
 import AboutPage from "./pages/AboutPage";
-
-//ANT D TEST
+import AntFooter from "./components/AntFooter";
 import { Layout } from "antd";
-const { Header, Footer, Content } = Layout;
-//ANT D TEST
+
+const { Header, Content, Footer } = Layout;
 
 function App() {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        flex: 1,
-        height: "100vh",
-      }}
-    >
+    <div>
       <Layout>
         <Header>
           <Navbar />
         </Header>
-        <Content>
+        <Content style={{ padding: '0 50px', marginTop: '64px' }}>
           <Routes>
             <Route exact path="/" element={<Homepage />} />
             <Route exact path="/profile" element={<ProfilePage />} />
@@ -72,7 +63,9 @@ function App() {
             />
           </Routes>
         </Content>
-        <Footer />
+        <Footer className="layoutFooter">
+          <AntFooter />
+        </Footer>
       </Layout>
     </div>
   );
