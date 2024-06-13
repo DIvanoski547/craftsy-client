@@ -51,9 +51,19 @@ function LoginPage() {
   };
 
   return (
-    <div className="login-page">
+    <div
+      className="login-page"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        marginTop: "100px",
+      }}
+    >
       <Card className="login-card">
-        <h1>Login Page</h1>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+          <h1>Login Page</h1>
+        </div>
         <Form
           name="normal_login"
           className="login-form"
@@ -109,15 +119,16 @@ function LoginPage() {
           )}
 
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-              disabled={isLoading}
-            >
-              {isLoading ? "Logging in..." : "Login"}
-            </Button>
-           
+            <div  style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+                disabled={isLoading}
+              >
+                {isLoading ? "Logging in..." : "Login"}
+              </Button>
+            </div>
           </Form.Item>
         </Form>
       </Card>

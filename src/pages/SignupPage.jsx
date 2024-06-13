@@ -51,8 +51,16 @@ function SignupPage() {
 
   return (
     <div>
-      <Card>
-        <h1>Signup Page</h1>
+      <Card style={{width: '500px'}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <h1>Signup Page</h1>
+        </div>
         <Form
           name="basic"
           labelCol={{
