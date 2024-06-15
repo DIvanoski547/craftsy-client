@@ -1,10 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import productsService from "../services/Product.service";
 import AddProduct from "../components/AddProduct";
 import ProductCard from "../components/ProductCard";
 import { AuthContext } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from 'antd';
+import { Button, Layout, Menu, Spin, Alert } from "antd";
+import {
+  LaptopOutlined,
+  NotificationOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+
+const { Content, Sider } = Layout;
 
 function ProductListPage() {
   const [products, setProducts] = useState([]);
@@ -12,6 +19,25 @@ function ProductListPage() {
   const [loading, setLoading] = useState(true);
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // Menu items
+  const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
+    (icon, index) => {
+      const key = String(index + 1);
+      return {
+        key: `sub${key}`,
+        icon: React.createElement(icon),
+        label: `subnav ${key}`,
+        children: new Array(4).fill(null).map((_, j) => {
+          const subKey = index * 4 + j + 1;
+          return {
+            key: subKey,
+            label: `option${subKey}`,
+          };
+        }),
+      };
+    }
+  );
 
   const getAllProducts = () => {
     productsService
@@ -33,29 +59,56 @@ function ProductListPage() {
 
   const handleBack = () => {
     navigate(-1);
-  }
+  };
 
   return (
-    <div>
-      <h1>Product List Page</h1>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Content
+        style={{
+          padding: "0 48px",
+        }}
+      >
+        <Layout style={{ paddingBottom: "25px" }}>
+          <Sider style={{}} width={200}>
+            <Menu
+              mode="inline"
+              defaultSelectedKeys={["1"]}
+              defaultOpenKeys={["sub1"]}
+              style={{
+                height: "100%",
+              }}
+              items={items2}
+            />
+          </Sider>
+          <Content
+            style={{
+              padding: "0 24px",
+              minHeight: 280,
+              backgroundColor: "lightgrey",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "small",
+            }}
+          >
+            {isLoggedIn && (
+              <>
+                <AddProduct refreshProducts={getAllProducts} />
+              </>
+            )}
 
-      {isLoggedIn && (
-        <>
-          <AddProduct refreshProducts={getAllProducts} />
-        </>
-      )}
+            {loading && <p>Loading products...</p>}
 
-      {loading && <p>Loading products...</p>}
+            {error && <p>{error}</p>}
 
-      {error && <p>{error}</p>}
-
-      {!loading &&
-        !error &&
-          products.map((product) => (
-            <ProductCard key={product._id} {...product} />
-          ))}
-          <Button onClick={handleBack}>Back</Button>
-    </div>
+            {!loading &&
+              !error &&
+              products.map((product) => (
+                <ProductCard key={product._id} {...product} />
+              ))}
+          </Content>
+        </Layout>
+      </Content>
+    </Layout>
   );
 }
 
