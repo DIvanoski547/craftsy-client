@@ -61,8 +61,14 @@ function LoginPage() {
       }}
     >
       <Card className="login-card">
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-          <h1>Login Page</h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <h1>Login</h1>
         </div>
         <Form
           name="normal_login"
@@ -119,7 +125,13 @@ function LoginPage() {
           )}
 
           <Form.Item>
-            <div  style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Button
                 type="primary"
                 htmlType="submit"

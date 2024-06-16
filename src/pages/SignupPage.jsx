@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../services/auth.service";
 import { Button, Checkbox, Form, Input, Card } from "antd";
+import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 
 function SignupPage() {
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -50,8 +51,16 @@ function SignupPage() {
   };
 
   return (
-    <div>
-      <Card style={{width: '500px'}}>
+    <div
+      className="login-page"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        marginTop: "100px",
+      }}
+    >
+      <Card className="login-card">
         <div
           style={{
             display: "flex",
@@ -59,19 +68,10 @@ function SignupPage() {
             alignItems: "center",
           }}
         >
-          <h1>Signup Page</h1>
+          <h1>Signup</h1>
         </div>
         <Form
           name="basic"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          style={{
-            maxWidth: 600,
-          }}
           initialValues={{
             remember: true,
           }}
@@ -79,7 +79,6 @@ function SignupPage() {
           autoComplete="off"
         >
           <Form.Item
-            label="Username"
             name="username"
             rules={[
               {
@@ -88,11 +87,13 @@ function SignupPage() {
               },
             ]}
           >
-            <Input />
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Username"
+            />
           </Form.Item>
 
           <Form.Item
-            label="Email"
             name="email"
             rules={[
               {
@@ -101,11 +102,13 @@ function SignupPage() {
               },
             ]}
           >
-            <Input />
+            <Input
+              prefix={<MailOutlined className="site-form-item-icon" />}
+              placeholder="Email"
+            />
           </Form.Item>
 
           <Form.Item
-            label="Password"
             name="password"
             rules={[
               {
@@ -114,7 +117,10 @@ function SignupPage() {
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              placeholder="Password"
+            />
           </Form.Item>
 
           <Form.Item

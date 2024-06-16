@@ -27,7 +27,7 @@ function ProductListPage() {
       return {
         key: `sub${key}`,
         icon: React.createElement(icon),
-        label: `subnav ${key}`,
+        label: `category ${key}`,
         children: new Array(4).fill(null).map((_, j) => {
           const subKey = index * 4 + j + 1;
           return {
