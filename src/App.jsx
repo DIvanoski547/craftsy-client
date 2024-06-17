@@ -20,10 +20,10 @@ function App() {
   return (
     <div>
       <Layout>
-        <Header>
+        <Header style={{borderRadius: '10px'}}>
           <Navbar />
         </Header>
-        <Content style={{ padding: '0 50px', marginTop: '64px' }}>
+        <Content>
           <Routes>
             <Route exact path="/" element={<Homepage />} />
             <Route exact path="/profile" element={<ProfilePage />} />

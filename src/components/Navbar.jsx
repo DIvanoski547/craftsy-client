@@ -44,7 +44,7 @@ function Navbar() {
   }));
 
   return (
-    <div >
+    <div>
         <Menu
           theme="dark"
           mode="horizontal"

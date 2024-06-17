@@ -65,7 +65,7 @@ function ProductListPage() {
     <Layout style={{ minHeight: "100vh" }}>
       <Content
         style={{
-          padding: "0 48px",
+          padding: "48px",
         }}
       >
         <Layout style={{ paddingBottom: "25px" }}>

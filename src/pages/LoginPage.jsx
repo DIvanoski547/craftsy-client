@@ -3,7 +3,7 @@ import authService from "../services/auth.service";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Input, Card } from "antd";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -88,7 +88,7 @@ function LoginPage() {
             ]}
           >
             <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
+              prefix={<MailOutlined className="site-form-item-icon" />}
               value={email}
               placeholder="Email"
               onChange={handleEmail}
