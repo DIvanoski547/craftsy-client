@@ -4,21 +4,25 @@ import { Carousel } from "antd";
 function Homepage() {
   return (
     <div>
-      {/* <h1>Homepage</h1> */}
-      <img
-        src="../src/assets/background.jpg"
-        alt="background_img"
-        style={{
-          display: "block",
-          height: "100vh",
-          width: "100%",
-          marginTop: "-64px",
-          marginBottom: "-61px",
-          fontSize: "50px",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+      <div className="background-img">
+        {" "}
+        <img
+          src="../src/assets/background.jpg"
+          alt="background_img"
+          style={{
+            display: "block",
+            height: "100vh",
+            width: "100%",
+            marginTop: "-64px",
+            marginBottom: "-61px",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+        <div className="background-text" style={{ position: 'absolute', top: '30%', left: '20%', transform: 'translate(-50%, -50%)'}}>
+          <h1 style={{color: 'white', fontFamily: 'Tangerine', fontSize: '40px'}}>Efficiency Redefined</h1>
+        </div>
+      </div>
 
       {/* <Carousel autoplay>
         <div>

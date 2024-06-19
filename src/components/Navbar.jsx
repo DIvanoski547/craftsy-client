@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
-import { Button, Menu } from "antd";
+import { Menu } from "antd";
+import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 function Navbar() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -19,46 +20,51 @@ function Navbar() {
     },
     {
       key: "3",
+      label: "Gallery",
+      link: "/gallery",
+    },
+    {
+      key: "4",
       label: "About",
       link: "/about",
     },
     {
-      key: "4",
-      label: "Signup",
-      link: "/signup",
+      key: "6",
+      label: <UserOutlined />,
+      link: isLoggedIn ? "/" : "/login",
+      onClick: isLoggedIn ? logOutUser : null,
+      style: { marginLeft: "auto" },
     },
     {
       key: "5",
-      label: "Login",
-      link: "/login",
-    },
+      label: <ShoppingCartOutlined />,
+      link: "/shoppingcart",
+    }
   ];
 
-  const filteredMenuItems = isLoggedIn
-    ? menuItems.filter((item) => item.key !== "4" && item.key !== "5")
-    : menuItems;
-
-  const items = filteredMenuItems.map((item) => ({
-    ket: item.key,
-    label: <Link to={item.link}>{item.label}</Link>,
+  const items = menuItems.map((item) => ({
+    key: item.key,
+    label: item.onClick ? (
+      <span style={{ cursor: "pointer" }} onClick={item.onClick}>
+        {item.label}
+      </span>
+    ) : (
+      <Link to={item.link}>{item.label}</Link>
+    ),
+    style: item.style || {},
   }));
 
   return (
-    <div>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          items={items}
-          style={{
-            flex: 1,
-            minWidth: 0,
-          }}
-        />
-        {isLoggedIn && (
-          <Button type="primary" onClick={logOutUser}>
-            Logout
-          </Button>
-        )}
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        items={items}
+        style={{
+          flex: 1,
+          minWidth: 0,
+        }}
+      />
     </div>
   );
 }
